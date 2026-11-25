@@ -30,7 +30,7 @@
   <!-- TODAY: one hero metric (steps + goal ring), then supporting stats sized by importance.
        Reference idea (Fitbit / Apple Health / Garmin): lead with the single number
        that matters most today, keep the rest as smaller tiles. -->
-  <section id="dashboard" class="card hero-card" aria-labelledby="dashTitle">
+  <section id="dashboard" class="card hero-card page" aria-labelledby="dashTitle">
     <div class="section-head">
       <div>
         <p class="section-eyebrow">Today</p>
@@ -63,18 +63,28 @@
       </div>
 
       <div class="stat-grid">
-        <div class="stat stat--heart"><span class="stat-label">Heart rate</span><span class="stat-value" id="statHr">—</span><span class="stat-unit">bpm</span></div>
-        <div class="stat stat--sleep"><span class="stat-label">Sleep</span><span class="stat-value" id="statSleep">—</span><span class="stat-unit">hours</span></div>
-        <div class="stat stat--cal"><span class="stat-label">Calories</span><span class="stat-value" id="statCal">—</span><span class="stat-unit">kcal</span></div>
-        <div class="stat stat--dist"><span class="stat-label">Distance</span><span class="stat-value" id="statDist">—</span><span class="stat-unit">km</span></div>
-        <div class="stat stat--weight"><span class="stat-label">Weight</span><span class="stat-value" id="statWeight">—</span><span class="stat-unit">kg</span></div>
-        <div class="stat stat--workouts"><span class="stat-label">Workouts this week</span><span class="stat-value" id="statWorkouts">0 / 3</span><span class="stat-unit">goal is a default</span></div>
+        <a class="stat stat--heart" href="#progress"><span class="stat-label">Heart rate</span><span class="stat-value" id="statHr">—</span><span class="stat-unit">bpm · tap to see progress →</span></a>
+        <a class="stat stat--sleep" href="#progress"><span class="stat-label">Sleep</span><span class="stat-value" id="statSleep">—</span><span class="stat-unit">hours · tap to see progress →</span></a>
+        <a class="stat stat--cal" href="#progress"><span class="stat-label">Calories</span><span class="stat-value" id="statCal">—</span><span class="stat-unit">kcal · tap to see progress →</span></a>
+        <a class="stat stat--dist" href="#progress"><span class="stat-label">Distance</span><span class="stat-value" id="statDist">—</span><span class="stat-unit">km · tap to see progress →</span></a>
+        <a class="stat stat--weight" href="#progress"><span class="stat-label">Weight</span><span class="stat-value" id="statWeight">—</span><span class="stat-unit">kg · tap to see progress →</span></a>
+        <a class="stat stat--workouts" href="#workouts"><span class="stat-label">Workouts this week</span><span class="stat-value" id="statWorkouts">0 / 3</span><span class="stat-unit">goal is a default · tap to open workouts →</span></a>
       </div>
     </div>
     <p class="hero-note">Small steps, every day — that&rsquo;s how progress happens.</p>
+    <div class="menu-grid" aria-label="Open a page">
+      <a class="menu-card" href="#log"><span class="menu-icon" aria-hidden="true">✎</span><span class="menu-label">Log a day</span><span class="menu-sub">Add today&rsquo;s readings</span></a>
+      <a class="menu-card" href="#workouts"><span class="menu-icon" aria-hidden="true">💪</span><span class="menu-label">Workouts</span><span class="menu-sub">Log a workout</span></a>
+      <a class="menu-card" href="#progress"><span class="menu-icon" aria-hidden="true">📈</span><span class="menu-label">Progress</span><span class="menu-sub">14-day chart</span></a>
+      <a class="menu-card" href="#history"><span class="menu-icon" aria-hidden="true">🕘</span><span class="menu-label">History</span><span class="menu-sub">Past readings</span></a>
+      <a class="menu-card" href="#connect"><span class="menu-icon" aria-hidden="true">⌚</span><span class="menu-label">Connect Band</span><span class="menu-sub">Sync your band</span></a>
+      <a class="menu-card" href="#goals"><span class="menu-icon" aria-hidden="true">🎯</span><span class="menu-label">Goals</span><span class="menu-sub">Set your targets</span></a>
+    </div>
+    <p class="muted" style="text-align:center">Tap any card above to open its own page.</p>
   </section>
 
-  <section id="log" class="card" aria-labelledby="logTitle">
+  <section id="log" class="card page" aria-labelledby="logTitle">
+    <p><a class="back-link" href="#dashboard">&larr; Back to Today</a></p>
     <p class="section-eyebrow">Step 1 &middot; Takes under a minute</p>
     <h2 id="logTitle">Log a day&rsquo;s band readings</h2>
     <p class="muted">Enter the numbers shown on your health band or its app. One reading per date — saving again for the same date updates it.</p>
@@ -97,7 +107,8 @@
     </form>
   </section>
 
-  <section id="workouts" class="card" aria-labelledby="workoutsTitle">
+  <section id="workouts" class="card page" aria-labelledby="workoutsTitle">
+    <p><a class="back-link" href="#dashboard">&larr; Back to Today</a></p>
     <p class="section-eyebrow">Step 2 &middot; Move a little more</p>
     <h2 id="workoutsTitle">Log a workout</h2>
     <p class="muted">Every workout counts, even a short walk. Add it here and your weekly total grows.</p>
@@ -121,7 +132,8 @@
     <ul id="workoutList" class="list"></ul>
   </section>
 
-  <section id="progress" class="card" aria-labelledby="progressTitle">
+  <section id="progress" class="card page" aria-labelledby="progressTitle">
+    <p><a class="back-link" href="#dashboard">&larr; Back to Today</a></p>
     <p class="section-eyebrow">Your trend &middot; Last 14 days</p>
     <h2 id="progressTitle">Progress</h2>
     <p class="muted">Tap a metric to switch the chart. Bars show daily totals; weight shows as a line, so you can see the trend.</p>
@@ -142,7 +154,8 @@
     </div>
   </section>
 
-  <section id="history" class="card" aria-labelledby="historyTitle">
+  <section id="history" class="card page" aria-labelledby="historyTitle">
+    <p><a class="back-link" href="#dashboard">&larr; Back to Today</a></p>
     <p class="section-eyebrow">Look back</p>
     <h2 id="historyTitle">History</h2>
     <h3>Readings</h3>
@@ -158,7 +171,8 @@
     <p id="historyWorkoutsEmpty" class="empty-note">No workouts yet.</p>
   </section>
 
-  <section id="connect" class="card" aria-labelledby="connectTitle">
+  <section id="connect" class="card page" aria-labelledby="connectTitle">
+    <p><a class="back-link" href="#dashboard">&larr; Back to Today</a></p>
     <p class="section-eyebrow">Get your band&rsquo;s numbers in here</p>
     <h2 id="connectTitle">Connect Band</h2>
     <p class="notice"><strong>No band is connected yet.</strong> This website does not pull data from any band automatically. Readings are entered from your health band or its app, or imported from a CSV file below.</p>
@@ -169,13 +183,13 @@
         <ol class="steps-list">
           <li>Open your band&rsquo;s app (for example Mi Fitness, NoiseFit, boAt Crest, Fitbit, or Samsung Health) and pair your band.</li>
           <li><strong>Android:</strong> turn on sharing to Health Connect in the band app&rsquo;s settings, and allow steps, heart rate, sleep and exercise. <strong>iPhone:</strong> turn on sharing to Apple Health in the band app&rsquo;s settings.</li>
-          <li>Wear the band and let it sync. Then read the numbers from the band app or Health Connect / Apple Health and enter them in &ldquo;Log a day&rsquo;s band readings&rdquo; above, or export a CSV and import it below.</li>
+          <li>Wear the band and let it sync. Then read the numbers from the band app or Health Connect / Apple Health and enter them on the <a href="#log">Log a day</a> page, or export a CSV and import it on this page.</li>
         </ol>
       </div>
       <div class="connect-option">
         <p class="option-num">2</p>
         <h3>Manual entry</h3>
-        <p>Use the &ldquo;Log a day&rsquo;s band readings&rdquo; form. This works for any band, with no account or connection needed.</p>
+        <p>Use the <a href="#log">Log a day</a> page. This works for any band, with no account or connection needed.</p>
       </div>
       <div class="connect-option">
         <p class="option-num">3</p>
@@ -188,7 +202,8 @@
     </div>
   </section>
 
-  <section id="goals" class="card" aria-labelledby="goalsTitle">
+  <section id="goals" class="card page" aria-labelledby="goalsTitle">
+    <p><a class="back-link" href="#dashboard">&larr; Back to Today</a></p>
     <p class="section-eyebrow">Make it yours</p>
     <h2 id="goalsTitle">Goals</h2>
     <p class="muted">Defaults shown are <strong>10,000 steps a day</strong> and <strong>3 workouts a week</strong>. They are editable placeholders, not recorded data — change them and save to make them yours.</p>
@@ -219,5 +234,40 @@
 </footer>
 
 <script src="app.js"></script>
+<script>
+/* Page navigation: one page at a time, driven by the URL hash.
+   Tapping any nav link, dashboard menu card or stat tile changes the hash
+   (e.g. #log), and only that page is shown. The browser Back button works
+   because each page is a real hash history entry. app.js is untouched and
+   keeps rendering all sections; hidden sections still exist in the DOM, so
+   every form, the chart and localStorage keep working. */
+(function () {
+  'use strict';
+  var PAGES = ['dashboard', 'log', 'workouts', 'progress', 'history', 'connect', 'goals'];
+  function currentPage() {
+    var h = (location.hash || '#dashboard').replace('#', '');
+    return PAGES.indexOf(h) !== -1 ? h : 'dashboard';
+  }
+  function showPage() {
+    var page = currentPage();
+    PAGES.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.toggle('page-active', id === page);
+    });
+    document.querySelectorAll('.nav a').forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + page);
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', showPage);
+  // Editing a reading from History: app.js scrolls to #log, so open the
+  // Log page first (capture phase runs before app.js's button handler).
+  document.getElementById('historyBody').addEventListener('click', function (e) {
+    var t = e.target;
+    if (t && t.textContent === 'Edit') location.hash = '#log';
+  }, true);
+  showPage();
+})();
+</script>
 </body>
 </html>

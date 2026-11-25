@@ -69,6 +69,35 @@ body {
 .nav a:hover { background: #d2ff5e; }
 .nav a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 
+/* ---- Separate pages: only the active page is shown.
+   Nav links, menu cards and stat tiles change the URL hash (#log, #progress,
+   ...), so each tap opens its own page and the browser Back button works. ---- */
+.page { display: none; }
+.page-active { display: block; }
+.back-link {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-weight: 700; color: var(--ink); text-decoration: none;
+  background: #f0f3e8; border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px;
+}
+.back-link:hover { background: var(--lime); }
+.nav a.active { background: #fff; box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* ---- Dashboard menu: tappable icon cards that open each page ---- */
+.menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+.menu-card {
+  display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: var(--ink);
+  background: #fbfaf5; border: 1px solid var(--line); border-top: 4px solid var(--lime);
+  border-radius: 14px; padding: 16px; min-height: 96px;
+}
+.menu-card:hover { background: #f0f3e8; border-top-color: var(--ink); }
+.menu-icon { font-size: 28px; line-height: 1.2; }
+.menu-label { font-weight: 800; font-size: 16px; }
+.menu-sub { font-size: 13px; color: var(--muted); }
+
+/* ---- Stat tiles are links to their pages ---- */
+a.stat { text-decoration: none; color: inherit; cursor: pointer; }
+a.stat:hover { background: #f0f3e8; }
+
 /* ---- Cards & sections ---- */
 main { padding: 20px 0 32px; }
 .card {
@@ -231,6 +260,7 @@ code { background: #eef1e6; padding: 1px 6px; border-radius: 6px; font-size: 13p
 
 /* ---- Wider screens: hero + stats side by side, 3-col tiles ---- */
 @media (min-width: 720px) {
+  .menu-grid { grid-template-columns: repeat(3, 1fr); }
   .dash-grid { grid-template-columns: 1.1fr 1fr; align-items: stretch; }
   .stat-grid { grid-template-columns: repeat(3, 1fr); }
   .summary-grid { grid-template-columns: repeat(4, 1fr); }
