@@ -207,7 +207,7 @@
       <p class="muted"><strong>Works in:</strong> Chrome on Android or on a computer (this site is on HTTPS, which Bluetooth needs). <strong>Does not work in:</strong> Safari on iPhone — Safari does not let web pages connect to Bluetooth watches, so iPhone users should use the Apple Health steps below.</p>
       <p class="muted"><strong>Honest limit:</strong> a web page cannot connect directly to an Apple Watch, Fitbit or Garmin watch. Those watches only talk to their own apps (Apple Health, Fitbit app, Garmin Connect) and do not offer a direct web connection. For them, use option 1 below — sync the watch to its phone app, then enter the numbers here.</p>
     </div>
-    <p class="notice"><strong>No band is connected yet.</strong> Unless a watch is connected directly above, this website does not pull data from any band automatically. Readings are entered from your health band or its app, or imported from a CSV file below.</p>
+    <p class="notice"><strong>No band is connected yet.</strong> Unless a watch is connected directly above, this website does not pull data from any band automatically. Readings are entered from your health band or its app.</p>
     <div class="connect-grid">
       <div class="connect-option">
         <p class="option-num">1</p>
@@ -215,21 +215,13 @@
         <ol class="steps-list">
           <li>Open your band&rsquo;s app (for example Mi Fitness, NoiseFit, boAt Crest, Fitbit, or Samsung Health) and pair your band.</li>
           <li><strong>Android:</strong> turn on sharing to Health Connect in the band app&rsquo;s settings, and allow steps, heart rate, sleep and exercise. <strong>iPhone:</strong> turn on sharing to Apple Health in the band app&rsquo;s settings.</li>
-          <li>Wear the band and let it sync. Then read the numbers from the band app or Health Connect / Apple Health and enter them on the <a href="#log">Log a day</a> page, or export a CSV and import it on this page.</li>
+          <li>Wear the band and let it sync. Then read the numbers from the band app or Health Connect / Apple Health and enter them on the <a href="#log">Log a day</a> page.</li>
         </ol>
       </div>
       <div class="connect-option">
         <p class="option-num">2</p>
         <h3>Manual entry</h3>
         <p>Use the <a href="#log">Log a day</a> page. This works for any band, with no account or connection needed.</p>
-      </div>
-      <div class="connect-option">
-        <p class="option-num">3</p>
-        <h3>CSV import</h3>
-        <p class="muted">CSV columns, in this order: <code>date,steps,heart_rate,sleep_hours,calories,distance_km,weight_kg</code><br>
-        Example: <code>2026-11-24,8500,72,7.5,2100,6.2,68.5</code> — empty cells are allowed. Importing a date that already exists updates that day&rsquo;s reading.</p>
-        <label class="file-label">Choose CSV file <input type="file" id="csvFile" accept=".csv,text/csv"></label>
-        <p id="csvMsg" class="msg" role="status"></p>
       </div>
     </div>
   </section>

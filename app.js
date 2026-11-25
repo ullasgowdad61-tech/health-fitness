@@ -448,38 +448,6 @@
       save(); renderAll(); resetReadingForm();
     });
 
-    $('csvFile').addEventListener('change', function (e) {
-      var file = e.target.files && e.target.files[0];
-      if (!file) return;
-      var reader = new FileReader();
-      reader.onload = function () {
-        var text = String(reader.result || '');
-        var lines = text.split(/\r?\n/).filter(function (l) { return l.trim() !== ''; });
-        var added = 0, updated = 0, skipped = 0;
-        lines.forEach(function (line) {
-          var parts = line.split(',').map(function (p) { return p.trim(); });
-          if (parts[0] && parts[0].toLowerCase() === 'date') return; // header row
-          if (!/^\d{4}-\d{2}-\d{2}$/.test(parts[0] || '')) { skipped++; return; }
-          var rec = {
-            date: parts[0],
-            steps: parseNum(parts[1]),
-            heart_rate: parseNum(parts[2]),
-            sleep_hours: parseNum(parts[3]),
-            calories: parseNum(parts[4]),
-            distance_km: parseNum(parts[5]),
-            weight_kg: parseNum(parts[6])
-          };
-          var result = upsertReading(rec);
-          if (result === 'added') added++; else updated++;
-        });
-        save(); renderAll();
-        setMsg($('csvMsg'), 'Imported ' + added + ' new, updated ' + updated + ', skipped ' + skipped + ' row(s).', true);
-        e.target.value = '';
-      };
-      reader.onerror = function () { setMsg($('csvMsg'), 'Could not read that file. Please try a .csv file.', false); };
-      reader.readAsText(file);
-    });
-
     renderAll();
   }
 

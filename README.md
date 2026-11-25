@@ -45,11 +45,11 @@ No installation, build step or internet connection is needed.
 - **Goals:** daily steps goal, weekly workouts goal and target weight. Editable and saved. The dashboard and weekly count update when goals change.
 - **Progress:** 14-day chart (plain canvas, no external libraries) switchable between steps, sleep, calories, heart rate and weight. Weight is shown as a line; the others as bars. Also shows 7-day average steps, 7-day average sleep, logging streak and total days logged.
 - **History:** full list of readings and workouts, newest first, with edit/delete for readings and delete for workouts.
-- **Connect Band:** steps to connect a band through Apple Health (iPhone) or Health Connect (Android), plus manual entry and CSV import. CSV columns in order: `date,steps,heart_rate,sleep_hours,calories,distance_km,weight_kg`. Example: `2026-11-24,8500,72,7.5,2100,6.2,68.5`. Importing a date that already exists updates that day.
+- **Connect Band:** steps to connect a band through Apple Health (iPhone) or Health Connect (Android), plus manual entry.
 
 ## Important — no live band sync
 
-**No band is connected yet, and this website does not pull data from any band automatically.** Readings are entered from the health band or its app, or imported from a CSV file. The data shown is only what has been entered on this device.
+**No band is connected yet, and this website does not pull data from any band automatically.** Readings are entered from the health band or its app. The data shown is only what has been entered on this device.
 
 ## Data and privacy
 
