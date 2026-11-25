@@ -31,6 +31,20 @@
    browser's hidden handling — keep hidden elements hidden everywhere. */
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; color-scheme: light; }
+/* Never let the phone's dark mode turn this site dark: force the
+   light colours even when the device prefers dark. */
+@media (prefers-color-scheme: dark) {
+  html { color-scheme: light; }
+  body {
+    background:
+      radial-gradient(650px 420px at 8% -5%, rgba(184, 241, 53, 0.38), transparent 60%),
+      radial-gradient(520px 380px at 96% 8%, rgba(255, 107, 87, 0.20), transparent 60%),
+      radial-gradient(720px 520px at 50% 112%, rgba(13, 148, 136, 0.16), transparent 60%),
+      linear-gradient(180deg, #fdf9ec 0%, #faf7ef 42%, #f2f7e6 100%);
+    color: var(--ink);
+  }
+  .card { background: linear-gradient(180deg, #ffffff 0%, #fffef9 100%); color: var(--ink); }
+}
 /* No page may ever scroll sideways: every grid/flex child may shrink. */
 html, body { overflow-x: hidden; }
 body {

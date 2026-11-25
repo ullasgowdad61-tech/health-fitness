@@ -5,7 +5,7 @@
    the service worker never reads, stores or sends it. */
 'use strict';
 
-var CACHE_NAME = 'health-fitness-v1';
+var CACHE_NAME = 'health-fitness-v2';
 var APP_SHELL = [
   './',
   './index.html',
