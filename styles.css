@@ -30,7 +30,7 @@
 /* The watch live panel uses display:grid, which would override the
    browser's hidden handling — keep hidden elements hidden everywhere. */
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; color-scheme: light; }
 /* No page may ever scroll sideways: every grid/flex child may shrink. */
 html, body { overflow-x: hidden; }
 body {
