@@ -27,6 +27,8 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* No page may ever scroll sideways: every grid/flex child may shrink. */
+html, body { overflow-x: hidden; }
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -34,7 +36,9 @@ body {
   color: var(--ink);
   line-height: 1.55;
 }
-.wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+img, svg, canvas, table { max-width: 100%; }
+/* Desktop: use the wide screen — centred container up to 1160px. */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
 
 /* ---- Header ---- */
 .site-header {
@@ -65,6 +69,7 @@ body {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
 }
 .nav a:hover { background: #d2ff5e; }
 .nav a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
@@ -144,8 +149,9 @@ h3 { margin: 20px 0 8px; font-size: 17px; }
   background: linear-gradient(150deg, var(--ink) 0%, #22301f 100%);
   color: #fff; border-radius: var(--radius); padding: 24px 20px;
 }
-.ring-wrap { position: relative; width: 180px; height: 180px; flex: none; }
-.ring { display: block; width: 180px; height: 180px; }
+/* Ring scales with the screen instead of a fixed 180px box. */
+.ring-wrap { position: relative; width: min(180px, 58vw); aspect-ratio: 1; flex: none; }
+.ring { display: block; width: 100%; height: auto; }
 .ring-bg { fill: none; stroke: #2c352e; stroke-width: 11; }
 .ring-fg {
   fill: none; stroke: var(--lime); stroke-width: 11; stroke-linecap: round;
@@ -159,7 +165,7 @@ h3 { margin: 20px 0 8px; font-size: 17px; }
 }
 .steps-big { font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
 .ring-label { font-size: 14px; color: #c9d2c6; margin-top: 4px; }
-.steps-side { min-width: 220px; flex: 1; }
+.steps-side { min-width: 0; flex: 1 1 200px; }
 .steps-side p { margin: 8px 0; }
 .pct-line { font-size: 18px; }
 .pct-line strong { color: var(--lime); font-size: 26px; }
@@ -210,8 +216,8 @@ input:focus, select:focus { outline: 3px solid var(--lime); border-color: var(--
 .btn-danger { background: #fff; color: var(--danger); border-color: var(--danger); }
 .btn-danger:hover { background: #fdecea; }
 .btn-small {
-  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; min-height: 36px;
-  background: #fff; border: 1px solid var(--ink); border-radius: 999px; padding: 6px 12px;
+  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; min-height: 44px;
+  background: #fff; border: 1px solid var(--ink); border-radius: 999px; padding: 8px 14px;
 }
 .btn-small:hover { background: var(--lime); }
 .msg { min-height: 1.2em; font-weight: 600; }
@@ -232,7 +238,9 @@ input:focus, select:focus { outline: 3px solid var(--lime); border-color: var(--
 }
 .chip.active { background: var(--lime); }
 .chip:focus-visible { outline: 3px solid var(--lime-dark); outline-offset: 2px; }
-#chart { width: 100%; height: 300px; display: block; background: #fbfcf7; border: 1px solid var(--line); border-radius: 12px; }
+/* Chart keeps its 800x300 drawing ratio at every width instead of being
+   squashed to a fixed 300px height on a narrow phone. */
+#chart { width: 100%; height: auto; aspect-ratio: 800 / 300; display: block; background: #fbfcf7; border: 1px solid var(--line); border-radius: 12px; }
 
 /* ---- History table ---- */
 .table-wrap { overflow-x: auto; border-radius: 12px; }
@@ -245,6 +253,7 @@ td .btn-small { margin-right: 4px; }
 .connect-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 14px; }
 .connect-option {
   background: #fbfaf5; border: 1px solid var(--line); border-radius: 14px; padding: 16px;
+  min-width: 0; overflow-wrap: break-word;
 }
 .connect-option h3 { margin-top: 0; }
 .option-num {
@@ -255,25 +264,74 @@ td .btn-small { margin-right: 4px; }
 .steps-list { padding-left: 20px; }
 .steps-list li { margin-bottom: 6px; }
 .file-label { font-weight: 600; display: block; }
-code { background: #eef1e6; padding: 1px 6px; border-radius: 6px; font-size: 13px; }
+code { background: #eef1e6; padding: 1px 6px; border-radius: 6px; font-size: 13px; overflow-wrap: anywhere; }
+.stat, .menu-card, .steps-box { min-width: 0; }
+.date-label input { min-width: 0; flex: 1; }
 .site-footer { background: var(--ink); color: #c9d2c6; padding: 20px 0; font-size: 14px; }
 
-/* ---- Wider screens: hero + stats side by side, 3-col tiles ---- */
-@media (min-width: 720px) {
+/* ---- Mobile (base, up to ~640px): single column, full-width controls ----
+   Forms are 1 column, stat tiles 2-up, menu cards 2-up, nav wraps, and
+   buttons stretch full width so every tap target is easy to reach. */
+@media (max-width: 640px) {
+  .form-actions .btn { flex: 1 1 100%; }
+  .form-actions .btn-danger { flex: 1 1 100%; }
+  .section-head { flex-direction: column; align-items: stretch; }
+  .date-label { width: 100%; }
+  .date-label input { flex: 1; }
+  .steps-box { flex-direction: column; padding: 20px 16px; }
+  .steps-side { flex-basis: auto; width: 100%; text-align: center; }
+  .steps-side .bar { margin: 0 auto; }
+}
+@media (max-width: 480px) {
+  .site-header { padding: 28px 0 22px; }
+  .site-header h1 { font-size: 34px; }
+  .tagline { font-size: 15px; }
+  .card { padding: 18px 16px; }
+  .steps-big { font-size: 36px; }
+  .stat-grid, .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-value { font-size: 22px; }
+  .menu-grid { gap: 10px; }
+  .menu-card { padding: 14px 12px; min-height: 88px; }
+  .nav a { font-size: 13px; padding: 8px 12px; }
+  h2 { font-size: 23px; }
+}
+
+/* ---- Small tablets (~640px): 2-col forms, 3-col menu/stats ---- */
+@media (min-width: 640px) {
+  .form-grid { grid-template-columns: repeat(2, 1fr); }
   .menu-grid { grid-template-columns: repeat(3, 1fr); }
-  .dash-grid { grid-template-columns: 1.1fr 1fr; align-items: stretch; }
+  .stat-grid { grid-template-columns: repeat(3, 1fr); }
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .connect-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---- Desktop (~900px): use the wide screen properly ----
+   Centred 1160px container, hero + stats side by side, 3-col forms,
+   4-col summary tiles, workout/history lists in 2 columns, larger type. */
+@media (min-width: 900px) {
+  .wrap { padding: 0 24px; }
+  .site-header { padding: 44px 0 32px; }
+  .site-header h1 { font-size: 52px; }
+  .tagline { font-size: 18px; }
+  main { padding: 28px 0 40px; }
+  .card { padding: 28px; }
+  h2 { font-size: 30px; }
+  .dash-grid { grid-template-columns: minmax(340px, 5fr) 7fr; align-items: stretch; }
   .stat-grid { grid-template-columns: repeat(3, 1fr); }
   .summary-grid { grid-template-columns: repeat(4, 1fr); }
   .form-grid { grid-template-columns: repeat(3, 1fr); }
   .connect-grid { grid-template-columns: repeat(3, 1fr); }
-  .connect-option:first-child { grid-column: span 1; }
+  .list { grid-template-columns: repeat(2, 1fr); }
+  .steps-box { padding: 28px; }
 }
-@media (max-width: 480px) {
-  .site-header h1 { font-size: 34px; }
-  .card { padding: 18px 16px; }
-  .ring-wrap, .ring { width: 160px; height: 160px; }
-  .steps-big { font-size: 36px; }
-  .stat-grid, .summary-grid { grid-template-columns: repeat(2, 1fr); }
+
+/* ---- Wide desktop (~1200px): one-row nav, roomier hero, bigger type ---- */
+@media (min-width: 1200px) {
+  .site-header h1 { font-size: 56px; }
+  .card { padding: 32px; }
+  .nav { flex-wrap: nowrap; }
+  .dash-grid { grid-template-columns: 460px 1fr; }
+  .steps-big { font-size: 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
