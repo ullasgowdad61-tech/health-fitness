@@ -241,9 +241,9 @@
     if (!ctx) return;
     var W = canvas.width, H = canvas.height;
     ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = '#fbfcf7'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#fdfcf4'; ctx.fillRect(0, 0, W, H);
     if (!present.length) {
-      ctx.fillStyle = '#5c665e'; ctx.font = '16px system-ui, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillStyle = '#5f6f68'; ctx.font = '16px system-ui, sans-serif'; ctx.textAlign = 'center';
       ctx.fillText('No data yet — log a reading to see your progress.', W / 2, H / 2);
       return;
     }
@@ -253,7 +253,7 @@
     var padL = 48, padB = 28, padT = 14, padR = 12;
     var plotW = W - padL - padR, plotH = H - padT - padB;
     // gridlines + y labels
-    ctx.strokeStyle = '#dde3d6'; ctx.fillStyle = '#5c665e'; ctx.font = '12px system-ui, sans-serif'; ctx.textAlign = 'right';
+    ctx.strokeStyle = '#dde3d6'; ctx.fillStyle = '#5f6f68'; ctx.font = '12px system-ui, sans-serif'; ctx.textAlign = 'right';
     for (var g = 0; g <= 4; g++) {
       var y = padT + plotH * g / 4;
       var val = max - (max - min) * g / 4;
@@ -263,7 +263,7 @@
     var slot = plotW / days.length;
     ctx.textAlign = 'center';
     if (currentMetric === 'weight_kg') {
-      ctx.strokeStyle = '#101613'; ctx.lineWidth = 3; ctx.beginPath();
+      ctx.strokeStyle = '#0b2e2a'; ctx.lineWidth = 3; ctx.beginPath();
       var started = false;
       days.forEach(function (d, idx) {
         var v = values[idx];
@@ -278,7 +278,7 @@
         if (v == null) return;
         var x = padL + slot * idx + slot / 2;
         var y = padT + plotH * (1 - (v - min) / (max - min));
-        ctx.fillStyle = '#b8f135'; ctx.strokeStyle = '#101613'; ctx.lineWidth = 2;
+        ctx.fillStyle = '#bff747'; ctx.strokeStyle = '#0b2e2a'; ctx.lineWidth = 2;
         ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       });
     } else {
@@ -288,12 +288,12 @@
         var h = plotH * (v - min) / (max - min);
         var x = padL + slot * idx + slot * 0.15;
         var y = padT + plotH - h;
-        ctx.fillStyle = '#b8f135'; ctx.strokeStyle = '#101613'; ctx.lineWidth = 1.5;
+        ctx.fillStyle = '#bff747'; ctx.strokeStyle = '#0b2e2a'; ctx.lineWidth = 1.5;
         ctx.fillRect(x, y, slot * 0.7, h);
         ctx.strokeRect(x, y, slot * 0.7, h);
       });
     }
-    ctx.fillStyle = '#5c665e'; ctx.font = '11px system-ui, sans-serif';
+    ctx.fillStyle = '#5f6f68'; ctx.font = '11px system-ui, sans-serif';
     days.forEach(function (d, idx) {
       if (idx % 2) return;
       ctx.fillText(d.slice(5), padL + slot * idx + slot / 2, H - 8);

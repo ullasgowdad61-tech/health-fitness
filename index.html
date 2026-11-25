@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Health Fitness — track your band readings, workouts and progress, all on your device.">
-<meta name="theme-color" content="#101613">
+<meta name="theme-color" content="#0b2e2a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -82,15 +82,15 @@
       </div>
     </div>
     <p class="hero-note">Small steps, every day — that&rsquo;s how progress happens.</p>
+    <h3 class="menu-heading">Open a page</h3>
     <div class="menu-grid" aria-label="Open a page">
-      <a class="menu-card" href="#log"><span class="menu-icon" aria-hidden="true">✎</span><span class="menu-label">Log a day</span><span class="menu-sub">Add today&rsquo;s readings</span></a>
-      <a class="menu-card" href="#workouts"><span class="menu-icon" aria-hidden="true">💪</span><span class="menu-label">Workouts</span><span class="menu-sub">Log a workout</span></a>
-      <a class="menu-card" href="#progress"><span class="menu-icon" aria-hidden="true">📈</span><span class="menu-label">Progress</span><span class="menu-sub">14-day chart</span></a>
-      <a class="menu-card" href="#history"><span class="menu-icon" aria-hidden="true">🕘</span><span class="menu-label">History</span><span class="menu-sub">Past readings</span></a>
-      <a class="menu-card" href="#connect"><span class="menu-icon" aria-hidden="true">⌚</span><span class="menu-label">Connect Band</span><span class="menu-sub">Sync your band</span></a>
-      <a class="menu-card" href="#goals"><span class="menu-icon" aria-hidden="true">🎯</span><span class="menu-label">Goals</span><span class="menu-sub">Set your targets</span></a>
+      <a class="menu-card menu-card--log" href="#log"><span class="menu-icon" aria-hidden="true">✎</span><span class="menu-label">Log a day</span><span class="menu-sub">Add today&rsquo;s readings</span></a>
+      <a class="menu-card menu-card--workouts" href="#workouts"><span class="menu-icon" aria-hidden="true">💪</span><span class="menu-label">Workouts</span><span class="menu-sub">Log a workout</span></a>
+      <a class="menu-card menu-card--progress" href="#progress"><span class="menu-icon" aria-hidden="true">📈</span><span class="menu-label">Progress</span><span class="menu-sub">14-day chart</span></a>
+      <a class="menu-card menu-card--history" href="#history"><span class="menu-icon" aria-hidden="true">🕘</span><span class="menu-label">History</span><span class="menu-sub">Past readings</span></a>
+      <a class="menu-card menu-card--connect" href="#connect"><span class="menu-icon" aria-hidden="true">⌚</span><span class="menu-label">Connect Band</span><span class="menu-sub">Sync your band</span></a>
+      <a class="menu-card menu-card--goals" href="#goals"><span class="menu-icon" aria-hidden="true">🎯</span><span class="menu-label">Goals</span><span class="menu-sub">Set your targets</span></a>
     </div>
-    <p class="muted" style="text-align:center">Tap any card above to open its own page.</p>
   </section>
 
   <section id="log" class="card page" aria-labelledby="logTitle">
@@ -154,8 +154,10 @@
       <button type="button" class="chip" data-metric="heart_rate">Heart rate</button>
       <button type="button" class="chip" data-metric="weight_kg">Weight</button>
     </div>
-    <canvas id="chart" width="800" height="300" aria-label="14-day progress chart"></canvas>
-    <p id="chartNote" class="muted"></p>
+    <div class="chart-panel">
+      <canvas id="chart" width="800" height="300" aria-label="14-day progress chart"></canvas>
+      <p id="chartNote" class="chart-note"></p>
+    </div>
     <div class="summary-grid">
       <div class="stat stat--steps"><span class="stat-label">7-day average steps</span><span class="stat-value" id="avgSteps">—</span></div>
       <div class="stat stat--sleep"><span class="stat-label">7-day average sleep</span><span class="stat-value" id="avgSleep">—</span></div>
@@ -243,10 +245,13 @@
       <p id="goalMsg" class="msg" role="status"></p>
       <p id="goalSavedNote" class="muted"></p>
     </form>
-    <div class="form-actions">
-      <button type="button" class="btn btn-danger" id="clearAll">Delete all my data</button>
+    <div class="danger-zone">
+      <h3>Your data, your device</h3>
+      <p>All data is stored only in this browser (localStorage). &ldquo;Delete all my data&rdquo; clears readings, workouts and saved goals on this device.</p>
+      <div class="form-actions">
+        <button type="button" class="btn btn-danger" id="clearAll">Delete all my data</button>
+      </div>
     </div>
-    <p class="muted">All data is stored only in this browser (localStorage). &ldquo;Delete all my data&rdquo; clears readings, workouts and saved goals on this device.</p>
   </section>
 
 </main>
