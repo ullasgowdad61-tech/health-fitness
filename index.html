@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Health Fitness — track your band readings, workouts and progress, all on your device.">
+<meta name="theme-color" content="#101613">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Health Fitness">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>Health Fitness</title>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,6 +21,8 @@
     <p class="eyebrow">Health Fitness Tracker</p>
     <h1>Health Fitness</h1>
     <p class="tagline">Every step counts. Log today&rsquo;s band readings and watch your progress add up.</p>
+    <p><button type="button" class="btn btn-install" id="installBtn" hidden>Install app</button>
+    <span id="installNote" class="install-note" hidden>Install this app on your phone or computer to open it full screen and use it offline.</span></p>
     <nav class="nav" aria-label="Sections">
       <a href="#dashboard">Today</a>
       <a href="#log">Log a day</a>
@@ -175,7 +185,29 @@
     <p><a class="back-link" href="#dashboard">&larr; Back to Today</a></p>
     <p class="section-eyebrow">Get your band&rsquo;s numbers in here</p>
     <h2 id="connectTitle">Connect Band</h2>
-    <p class="notice"><strong>No band is connected yet.</strong> This website does not pull data from any band automatically. Readings are entered from your health band or its app, or imported from a CSV file below.</p>
+    <div class="card watch-card">
+      <p class="section-eyebrow">Connect directly &middot; Bluetooth</p>
+      <h3>Connect Watch Directly</h3>
+      <p class="muted">Connect a Bluetooth watch or band straight to this app — no account, no server. It works with watches and bands that use the standard Bluetooth Heart Rate Service. Live heart rate from the watch is shown below and saved to today automatically.</p>
+      <p class="watch-device"><strong>Watch:</strong> <span id="watchDeviceName">No watch connected</span></p>
+      <div class="watch-live" id="watchLive" hidden>
+        <div class="watch-hr"><span class="stat-label">Live heart rate</span><span class="stat-value" id="watchLiveHr">—</span><span class="stat-unit">bpm</span></div>
+        <div class="watch-meta">
+          <p><strong>Battery:</strong> <span id="watchBattery">—</span></p>
+          <p><strong>Model:</strong> <span id="watchModel">—</span></p>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn" id="watchConnectBtn">Connect Watch</button>
+        <button type="button" class="btn btn-ghost" id="watchDisconnectBtn" hidden>Disconnect</button>
+        <button type="button" class="btn btn-ghost" id="watchSaveBtn">Save heart rate to today</button>
+      </div>
+      <p id="watchStatus" class="msg" role="status"></p>
+      <p id="watchSavedNote" class="muted"></p>
+      <p class="muted"><strong>Works in:</strong> Chrome on Android or on a computer (this site is on HTTPS, which Bluetooth needs). <strong>Does not work in:</strong> Safari on iPhone — Safari does not let web pages connect to Bluetooth watches, so iPhone users should use the Apple Health steps below.</p>
+      <p class="muted"><strong>Honest limit:</strong> a web page cannot connect directly to an Apple Watch, Fitbit or Garmin watch. Those watches only talk to their own apps (Apple Health, Fitbit app, Garmin Connect) and do not offer a direct web connection. For them, use option 1 below — sync the watch to its phone app, then enter the numbers here.</p>
+    </div>
+    <p class="notice"><strong>No band is connected yet.</strong> Unless a watch is connected directly above, this website does not pull data from any band automatically. Readings are entered from your health band or its app, or imported from a CSV file below.</p>
     <div class="connect-grid">
       <div class="connect-option">
         <p class="option-num">1</p>
@@ -229,11 +261,12 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>Health Fitness &middot; Data stays in your browser. No live band sync.</p>
+    <p>Health Fitness &middot; Works offline as an installed app. Data stays on your device. Direct Bluetooth connection for standard heart-rate watches; Apple Watch, Fitbit and Garmin connect through their own phone apps.</p>
   </div>
 </footer>
 
 <script src="app.js"></script>
+<script src="watch.js"></script>
 <script>
 /* Page navigation: one page at a time, driven by the URL hash.
    Tapping any nav link, dashboard menu card or stat tile changes the hash

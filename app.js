@@ -483,5 +483,25 @@
     renderAll();
   }
 
+  /* Public hook for watch.js (direct Bluetooth connection): save a live
+     heart-rate reading into today's reading without wiping the other
+     fields. No fake data — watch.js only calls this with a real value
+     received from a connected watch. */
+  window.HealthFitness = {
+    logLiveHeartRate: function (hr) {
+      hr = Math.round(Number(hr));
+      if (!hr || hr < 30 || hr > 220) return false;
+      var date = todayLocal();
+      var existing = readingFor(date);
+      if (existing) {
+        existing.heart_rate = hr;
+      } else {
+        upsertReading({ date: date, steps: null, heart_rate: hr, sleep_hours: null, calories: null, distance_km: null, weight_kg: null });
+      }
+      save(); renderAll();
+      return true;
+    }
+  };
+
   init();
 })();

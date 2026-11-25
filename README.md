@@ -2,7 +2,9 @@
 
 A single-page health fitness tracker.
 
-It records health-band readings and workouts, shows a daily dashboard and 14-day progress charts, and stores everything in the browser. There is no account, no server and no live band sync.
+It records health-band readings and workouts, shows a daily dashboard and 14-day progress charts, and stores everything in the browser. There is no account and no server. It works as a standalone installed app (PWA): install it from the browser, open it full screen, and use it offline after the first load.
+
+It can also connect directly to a Bluetooth watch or band that uses the standard Bluetooth Heart Rate Service (Web Bluetooth, Chrome on Android or desktop, over HTTPS). Live heart rate from a connected watch is shown on the Connect Band page and saved to today. A web page cannot connect directly to an Apple Watch, Fitbit or Garmin watch — those only work through their own phone apps (Apple Health, Fitbit app, Garmin Connect) — so for them, sync the watch to its phone app and enter the numbers here, as described on the Connect Band page.
 
 ## How to run it
 
@@ -28,6 +30,10 @@ No installation, build step or internet connection is needed.
 | --- | --- |
 | `index.html` | The whole page: dashboard, log-a-day form, workouts, progress chart, history, Connect Band section and goals. |
 | `styles.css` | All styling for `index.html` — warm dashboard design: one hero steps ring, colour-coded stat tiles, mobile-first with big tap targets. |
+| `watch.js` | Direct watch connection (Web Bluetooth: Heart Rate Service 0x180D, Battery 0x180F, Device Information), plus service-worker registration and the install prompt. |
+| `sw.js` | Service worker: caches the app files so the app works offline after the first load. |
+| `manifest.json` | PWA manifest: standalone display, theme colour, app icons. |
+| `icon-192.png`, `icon-512.png` | App icons (generated locally, no external images). |
 | `app.js` | All logic. Reads and writes `localStorage` only (key: `health-fitness-data-v1`). No backend and no external API calls. |
 | `README.md` | This file. |
 
