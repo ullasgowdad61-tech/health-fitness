@@ -35,7 +35,13 @@ html, body { overflow-x: hidden; }
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  background: var(--paper);
+  background:
+    radial-gradient(650px 420px at 8% -5%, rgba(184, 241, 53, 0.38), transparent 60%),
+    radial-gradient(520px 380px at 96% 8%, rgba(255, 107, 87, 0.20), transparent 60%),
+    radial-gradient(720px 520px at 50% 112%, rgba(13, 148, 136, 0.16), transparent 60%),
+    radial-gradient(420px 300px at 85% 55%, rgba(139, 92, 246, 0.10), transparent 60%),
+    linear-gradient(180deg, #fdf9ec 0%, #faf7ef 42%, #f2f7e6 100%);
+  background-attachment: fixed;
   color: var(--ink);
   line-height: 1.55;
 }
@@ -45,7 +51,10 @@ img, svg, canvas, table { max-width: 100%; }
 
 /* ---- Header ---- */
 .site-header {
-  background: linear-gradient(160deg, var(--ink) 0%, #1e2b22 100%);
+  background:
+    radial-gradient(500px 220px at 85% -20%, rgba(184, 241, 53, 0.35), transparent 60%),
+    radial-gradient(400px 200px at 5% 120%, rgba(255, 107, 87, 0.25), transparent 60%),
+    linear-gradient(135deg, #101613 0%, #1e2b22 55%, #14332e 100%);
   color: #fff;
   padding: 36px 0 28px;
   border-bottom: 6px solid var(--lime);
@@ -109,10 +118,11 @@ a.stat:hover { background: #f0f3e8; }
 /* ---- Cards & sections ---- */
 main { padding: 20px 0 32px; }
 .card {
-  background: var(--card);
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf6 100%);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 22px;
+  box-shadow: 0 8px 28px rgba(16, 22, 19, 0.08);
   margin-bottom: 20px;
   box-shadow: var(--shadow);
 }
