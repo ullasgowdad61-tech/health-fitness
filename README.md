@@ -1,6 +1,6 @@
 # Health Fitness
 
-A single-page health fitness tracker for **Ullas Gowda D (R25EJ168, B.Tech CSE)**.
+A single-page health fitness tracker.
 
 It records health-band readings and workouts, shows a daily dashboard and 14-day progress charts, and stores everything in the browser. There is no account, no server and no live band sync.
 
@@ -27,7 +27,7 @@ No installation, build step or internet connection is needed.
 | File | What it does |
 | --- | --- |
 | `index.html` | The whole page: dashboard, log-a-day form, workouts, progress chart, history, Connect Band section and goals. |
-| `styles.css` | All styling for `index.html` — athletic ink-and-lime design, mobile-friendly layout. |
+| `styles.css` | All styling for `index.html` — warm dashboard design: one hero steps ring, colour-coded stat tiles, mobile-first with big tap targets. |
 | `app.js` | All logic. Reads and writes `localStorage` only (key: `health-fitness-data-v1`). No backend and no external API calls. |
 | `README.md` | This file. |
 

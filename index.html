@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Health Fitness — Ullas Gowda D</title>
+<meta name="description" content="Health Fitness — track your band readings, workouts and progress, all on your device.">
+<title>Health Fitness</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,10 +12,9 @@
   <div class="wrap">
     <p class="eyebrow">Health Fitness Tracker</p>
     <h1>Health Fitness</h1>
-    <p class="student">Ullas Gowda D &middot; R25EJ168 &middot; B.Tech CSE</p>
-    <p class="tagline">Track your band readings, workouts and progress — all on your device.</p>
-    <nav class="nav">
-      <a href="#dashboard">Dashboard</a>
+    <p class="tagline">Every step counts. Log today&rsquo;s band readings and watch your progress add up.</p>
+    <nav class="nav" aria-label="Sections">
+      <a href="#dashboard">Today</a>
       <a href="#log">Log a day</a>
       <a href="#workouts">Workouts</a>
       <a href="#progress">Progress</a>
@@ -27,9 +27,15 @@
 
 <main class="wrap">
 
-  <section id="dashboard" class="card">
+  <!-- TODAY: one hero metric (steps + goal ring), then supporting stats sized by importance.
+       Reference idea (Fitbit / Apple Health / Garmin): lead with the single number
+       that matters most today, keep the rest as smaller tiles. -->
+  <section id="dashboard" class="card hero-card" aria-labelledby="dashTitle">
     <div class="section-head">
-      <h2>Today&rsquo;s Dashboard</h2>
+      <div>
+        <p class="section-eyebrow">Today</p>
+        <h2 id="dashTitle">How are you doing today?</h2>
+      </div>
       <label class="date-label">Date
         <input type="date" id="dashDate">
       </label>
@@ -39,36 +45,38 @@
     <div class="dash-grid">
       <div class="steps-box">
         <div class="ring-wrap">
-          <svg class="ring" viewBox="0 0 120 120" width="140" height="140" aria-hidden="true">
+          <svg class="ring" viewBox="0 0 120 120" width="180" height="180" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
             <circle class="ring-fg" id="stepsRing" cx="60" cy="60" r="52"></circle>
           </svg>
           <div class="ring-centre">
             <span id="stepsBig" class="steps-big">—</span>
-            <span class="ring-label">steps</span>
+            <span class="ring-label">steps today</span>
           </div>
         </div>
         <div class="steps-side">
-          <p><strong id="stepsPct">0%</strong> of daily goal</p>
+          <p class="pct-line"><strong id="stepsPct">0%</strong> of your daily goal</p>
           <div class="bar"><div id="stepsBar" class="bar-fill"></div></div>
           <p class="muted">Goal: <span id="stepsGoalLabel">10,000 steps (default)</span></p>
-          <p class="muted">Remaining: <span id="stepsLeft">—</span> steps</p>
+          <p class="steps-left">Only <strong><span id="stepsLeft">—</span> steps</strong> to go — you&rsquo;ve got this.</p>
         </div>
       </div>
 
       <div class="stat-grid">
-        <div class="stat"><span class="stat-label">Heart rate</span><span class="stat-value" id="statHr">—</span><span class="stat-unit">bpm</span></div>
-        <div class="stat"><span class="stat-label">Sleep</span><span class="stat-value" id="statSleep">—</span><span class="stat-unit">hours</span></div>
-        <div class="stat"><span class="stat-label">Calories</span><span class="stat-value" id="statCal">—</span><span class="stat-unit">kcal</span></div>
-        <div class="stat"><span class="stat-label">Distance</span><span class="stat-value" id="statDist">—</span><span class="stat-unit">km</span></div>
-        <div class="stat"><span class="stat-label">Weight</span><span class="stat-value" id="statWeight">—</span><span class="stat-unit">kg</span></div>
-        <div class="stat"><span class="stat-label">Workouts this week</span><span class="stat-value" id="statWorkouts">0 / 3</span><span class="stat-unit">goal is a default</span></div>
+        <div class="stat stat--heart"><span class="stat-label">Heart rate</span><span class="stat-value" id="statHr">—</span><span class="stat-unit">bpm</span></div>
+        <div class="stat stat--sleep"><span class="stat-label">Sleep</span><span class="stat-value" id="statSleep">—</span><span class="stat-unit">hours</span></div>
+        <div class="stat stat--cal"><span class="stat-label">Calories</span><span class="stat-value" id="statCal">—</span><span class="stat-unit">kcal</span></div>
+        <div class="stat stat--dist"><span class="stat-label">Distance</span><span class="stat-value" id="statDist">—</span><span class="stat-unit">km</span></div>
+        <div class="stat stat--weight"><span class="stat-label">Weight</span><span class="stat-value" id="statWeight">—</span><span class="stat-unit">kg</span></div>
+        <div class="stat stat--workouts"><span class="stat-label">Workouts this week</span><span class="stat-value" id="statWorkouts">0 / 3</span><span class="stat-unit">goal is a default</span></div>
       </div>
     </div>
+    <p class="hero-note">Small steps, every day — that&rsquo;s how progress happens.</p>
   </section>
 
-  <section id="log" class="card">
-    <h2>Log a day&rsquo;s band readings</h2>
+  <section id="log" class="card" aria-labelledby="logTitle">
+    <p class="section-eyebrow">Step 1 &middot; Takes under a minute</p>
+    <h2 id="logTitle">Log a day&rsquo;s band readings</h2>
     <p class="muted">Enter the numbers shown on your health band or its app. One reading per date — saving again for the same date updates it.</p>
     <form id="readingForm">
       <input type="hidden" id="readingId">
@@ -89,8 +97,10 @@
     </form>
   </section>
 
-  <section id="workouts" class="card">
-    <h2>Log a workout</h2>
+  <section id="workouts" class="card" aria-labelledby="workoutsTitle">
+    <p class="section-eyebrow">Step 2 &middot; Move a little more</p>
+    <h2 id="workoutsTitle">Log a workout</h2>
+    <p class="muted">Every workout counts, even a short walk. Add it here and your weekly total grows.</p>
     <form id="workoutForm">
       <div class="form-grid">
         <label>Type
@@ -111,8 +121,10 @@
     <ul id="workoutList" class="list"></ul>
   </section>
 
-  <section id="progress" class="card">
-    <h2>Progress — last 14 days</h2>
+  <section id="progress" class="card" aria-labelledby="progressTitle">
+    <p class="section-eyebrow">Your trend &middot; Last 14 days</p>
+    <h2 id="progressTitle">Progress</h2>
+    <p class="muted">Tap a metric to switch the chart. Bars show daily totals; weight shows as a line, so you can see the trend.</p>
     <div class="chart-controls" role="group" aria-label="Choose metric">
       <button type="button" class="chip active" data-metric="steps">Steps</button>
       <button type="button" class="chip" data-metric="sleep_hours">Sleep</button>
@@ -123,15 +135,16 @@
     <canvas id="chart" width="800" height="300" aria-label="14-day progress chart"></canvas>
     <p id="chartNote" class="muted"></p>
     <div class="summary-grid">
-      <div class="stat"><span class="stat-label">7-day average steps</span><span class="stat-value" id="avgSteps">—</span></div>
-      <div class="stat"><span class="stat-label">7-day average sleep</span><span class="stat-value" id="avgSleep">—</span></div>
-      <div class="stat"><span class="stat-label">Logging streak</span><span class="stat-value" id="streak">0 days</span></div>
-      <div class="stat"><span class="stat-label">Days logged (total)</span><span class="stat-value" id="daysLogged">0</span></div>
+      <div class="stat stat--steps"><span class="stat-label">7-day average steps</span><span class="stat-value" id="avgSteps">—</span></div>
+      <div class="stat stat--sleep"><span class="stat-label">7-day average sleep</span><span class="stat-value" id="avgSleep">—</span></div>
+      <div class="stat stat--streak"><span class="stat-label">Logging streak</span><span class="stat-value" id="streak">0 days</span><span class="stat-unit">keep it going</span></div>
+      <div class="stat stat--days"><span class="stat-label">Days logged (total)</span><span class="stat-value" id="daysLogged">0</span></div>
     </div>
   </section>
 
-  <section id="history" class="card">
-    <h2>History</h2>
+  <section id="history" class="card" aria-labelledby="historyTitle">
+    <p class="section-eyebrow">Look back</p>
+    <h2 id="historyTitle">History</h2>
     <h3>Readings</h3>
     <div class="table-wrap">
       <table>
@@ -145,26 +158,39 @@
     <p id="historyWorkoutsEmpty" class="empty-note">No workouts yet.</p>
   </section>
 
-  <section id="connect" class="card">
-    <h2>Connect Band</h2>
+  <section id="connect" class="card" aria-labelledby="connectTitle">
+    <p class="section-eyebrow">Get your band&rsquo;s numbers in here</p>
+    <h2 id="connectTitle">Connect Band</h2>
     <p class="notice"><strong>No band is connected yet.</strong> This website does not pull data from any band automatically. Readings are entered from your health band or its app, or imported from a CSV file below.</p>
-    <h3>Option 1 — Sync your band to your phone&rsquo;s health app</h3>
-    <ol class="steps-list">
-      <li>Open your band&rsquo;s app (for example Mi Fitness, NoiseFit, boAt Crest, Fitbit, or Samsung Health) and pair your band.</li>
-      <li><strong>Android:</strong> turn on sharing to Health Connect in the band app&rsquo;s settings, and allow steps, heart rate, sleep and exercise. <strong>iPhone:</strong> turn on sharing to Apple Health in the band app&rsquo;s settings.</li>
-      <li>Wear the band and let it sync. Then read the numbers from the band app or Health Connect / Apple Health and enter them in &ldquo;Log a day&rsquo;s band readings&rdquo; above, or export a CSV and import it below.</li>
-    </ol>
-    <h3>Option 2 — Manual entry</h3>
-    <p>Use the &ldquo;Log a day&rsquo;s band readings&rdquo; form. This works for any band, with no account or connection needed.</p>
-    <h3>Option 3 — CSV import</h3>
-    <p class="muted">CSV columns, in this order: <code>date,steps,heart_rate,sleep_hours,calories,distance_km,weight_kg</code><br>
-    Example: <code>2026-11-24,8500,72,7.5,2100,6.2,68.5</code> — empty cells are allowed. Importing a date that already exists updates that day&rsquo;s reading.</p>
-    <label class="file-label">Choose CSV file <input type="file" id="csvFile" accept=".csv,text/csv"></label>
-    <p id="csvMsg" class="msg" role="status"></p>
+    <div class="connect-grid">
+      <div class="connect-option">
+        <p class="option-num">1</p>
+        <h3>Sync your band to your phone&rsquo;s health app</h3>
+        <ol class="steps-list">
+          <li>Open your band&rsquo;s app (for example Mi Fitness, NoiseFit, boAt Crest, Fitbit, or Samsung Health) and pair your band.</li>
+          <li><strong>Android:</strong> turn on sharing to Health Connect in the band app&rsquo;s settings, and allow steps, heart rate, sleep and exercise. <strong>iPhone:</strong> turn on sharing to Apple Health in the band app&rsquo;s settings.</li>
+          <li>Wear the band and let it sync. Then read the numbers from the band app or Health Connect / Apple Health and enter them in &ldquo;Log a day&rsquo;s band readings&rdquo; above, or export a CSV and import it below.</li>
+        </ol>
+      </div>
+      <div class="connect-option">
+        <p class="option-num">2</p>
+        <h3>Manual entry</h3>
+        <p>Use the &ldquo;Log a day&rsquo;s band readings&rdquo; form. This works for any band, with no account or connection needed.</p>
+      </div>
+      <div class="connect-option">
+        <p class="option-num">3</p>
+        <h3>CSV import</h3>
+        <p class="muted">CSV columns, in this order: <code>date,steps,heart_rate,sleep_hours,calories,distance_km,weight_kg</code><br>
+        Example: <code>2026-11-24,8500,72,7.5,2100,6.2,68.5</code> — empty cells are allowed. Importing a date that already exists updates that day&rsquo;s reading.</p>
+        <label class="file-label">Choose CSV file <input type="file" id="csvFile" accept=".csv,text/csv"></label>
+        <p id="csvMsg" class="msg" role="status"></p>
+      </div>
+    </div>
   </section>
 
-  <section id="goals" class="card">
-    <h2>Goals</h2>
+  <section id="goals" class="card" aria-labelledby="goalsTitle">
+    <p class="section-eyebrow">Make it yours</p>
+    <h2 id="goalsTitle">Goals</h2>
     <p class="muted">Defaults shown are <strong>10,000 steps a day</strong> and <strong>3 workouts a week</strong>. They are editable placeholders, not recorded data — change them and save to make them yours.</p>
     <form id="goalForm">
       <div class="form-grid">
@@ -188,7 +214,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>Health Fitness &middot; Ullas Gowda D, R25EJ168, B.Tech CSE &middot; Data stays in your browser. No live band sync.</p>
+    <p>Health Fitness &middot; Data stays in your browser. No live band sync.</p>
   </div>
 </footer>
 
